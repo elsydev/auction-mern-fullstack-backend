@@ -92,7 +92,10 @@ let image;
     savedUser.confirmed = false;
     await savedUser.save();
      AuthEmail({ email: savedUser.email, token: savedUser.token });
-     const message = `Dear ${savedUser.userName}, Por favor haga click en el siguiente enlace e introduzca este codigo ${savedUser.token} para confirmar su cuenta:`;
+     const enlace=`<p>Ingresa el codigo al dar click en el enlace:</p>
+     <a href="${process.env.FRONTEND_URL}confirm-account">Confirmar Cuenta</a>
+     `
+     const message = `Dear ${savedUser.userName}, Por favor haga click en el siguiente enlace ${enlace} e introduzca este codigo ${savedUser.token} para confirmar su cuenta:`;
     sendEmails({email:savedUser.email,subject:"Confirmar Cuenta",message});
      res.json({savedUser,message:"Registro Exitoso, revise su email para confirmar cuenta"}).status(201);
     console.log(savedUser);
@@ -143,8 +146,9 @@ export const login=catchAsyncErrors(async (req,res,next)=>{
 });
 
 export const confirmar=catchAsyncErrors(async (req,res,next)=>{
-    try {
-        const { token } = req.body;
+        const { token } = req.body;  
+        try {
+  
     console.log("En backend confirmando token:", token);
 
     const userToConfirm = await User.findOne({ token });
@@ -222,7 +226,8 @@ export const requirePassword= catchAsyncErrors(async(req,res,next)=>{
       userFound.token = generarId();
       await userFound.save();
       passwordEmail({ email: userFound.email, token: userFound.token });
-      const message = `Dear ${userFound.userName}, Por favor haga click en el siguiente enlace e ingrese el siguiente codigo ${userFound.token} para confirmar su cuenta:`;
+      const enlace=`http://127.0.0.1:5173/validate-token`
+      const message = `Dear ${userFound.userName}, Por favor haga click en el siguiente enlace ${enlace} e ingrese el siguiente codigo ${userFound.token} para confirmar su cuenta:`;
     sendEmails({email:userFound.email,subject:"Actualizar password",message});
       res
         .status(200)

@@ -17,7 +17,8 @@ export const sendEmails=async({email,subject,message})=>{
         from: process.env.SMTP_MAILS,
         to: email,
         subject: subject,
-        text: message,
+        text: message
+
       };
       await transporter.sendMail(options);
 
