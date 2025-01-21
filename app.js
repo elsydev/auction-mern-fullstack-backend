@@ -28,7 +28,8 @@ const ACCEPTED_ORIGINS = [
     'http://127.0.0.1:5173/',
     "http://localhost:5174",
     "http://127.0.0.1:5174",
-    "https://heartfelt-clafoutis-4aa53b.netlify.app/"
+    "https://heartfelt-clafoutis-4aa53b.netlify.app/",
+    "https://auction-mern-fullstack-backend.onrender.com/api/auctionitem/allitems"
      
   ]
 app.use(
