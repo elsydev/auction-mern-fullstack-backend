@@ -31,14 +31,14 @@ const ACCEPTED_ORIGINS = [
     "https://heartfelt-clafoutis-4aa53b.netlify.app/"
      
   ]
- app.use(
+/*  app.use(
   cors({
     origin: [process.env.FRONTEND_URL],
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   })
-);
-/*     app.use(cors({
+); */
+     app.use(cors({
     origin: (origin, callback) => {
       
   
@@ -52,7 +52,7 @@ const ACCEPTED_ORIGINS = [
   
       return callback(new Error('Not allowed by CORS'))
     }
-  }))    */  
+  }))    
 app.use(morgan('dev'));
 
 app.use(express.urlencoded({extended:true}));
