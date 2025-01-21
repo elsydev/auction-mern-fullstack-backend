@@ -15,7 +15,10 @@ export const addNewAuctionItem=catchAsyncErrors(async(req,res,next)=>{
     }
     const {auctionImage}=req.files;
     const allowedFormats=["image/png","image/jpeg","image/webp"];
-
+    const size=auctionImage.size/1048576
+    if(size>1){
+      return next(new ErrorHandler("Tamaño de archivo debe ser menor a 1MB",400));
+    }
     if(!allowedFormats.includes(auctionImage.mimetype)){
         return next(new ErrorHandler("Formato de archivo no soportado",400));
     }
@@ -51,9 +54,9 @@ const alreadyOneAuctionActive= await Auction.find({
     createdBy:req.user._id,
     endTime:{$gt:new Date()},
 });
-if(alreadyOneAuctionActive.length > 0){
+if(alreadyOneAuctionActive.length > 2){
   console.log("datos de subasta activa",alreadyOneAuctionActive)
-    return next(new ErrorHandler("Ya existe una subasta activa o tiene una comision no pagada",400))
+    return next(new ErrorHandler("Ya existen 2 subastas activa o tiene una comision no pagada",400))
 }
 try {
     /* const cloudinaryResponse= await cloudinary.uploader.upload(
@@ -65,7 +68,9 @@ try {
         console.error("Cloudinary error:",cloudinaryResponse.error || "Unknown cloudinary error")
       return next (new ErrorHandler("Falló al subir la imagen a Cloudinary",500))
     }   */
-    const cloudinaryResponse = await uploadImage(auctionImage.tempFilePath);
+        //folder personalizado de acuerdo a la accion
+        const folder="AUCTION_MEDIA_FOLDER_AUCTIONS"
+    const cloudinaryResponse = await uploadImage(auctionImage.tempFilePath,folder);
     image = {
       url: cloudinaryResponse.secure_url,
       public_id: cloudinaryResponse.public_id,

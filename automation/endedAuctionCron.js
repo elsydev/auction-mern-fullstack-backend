@@ -71,8 +71,13 @@ export const endedAuctionCron = () => {
             },
             { new: true }
           );
-          const subject = `Congratulations! You won the auction for ${auction.title}`;
-          const message = `Dear ${bidder.userName}, Pagame`;
+          const subject = `Felicitaciones Ha ganado la subasta de  ${auction.title},numero de identificación: ${auction._id}`;
+          const message = `Estimado(a) ${bidder.userName},  \n\n Felicitciones!! Ha ganado la Subasta ${auction.title},
+          \n\n Antes de seguir con el proceso por favor contacte al subastador al correo: ${auctioneer.email} 
+          \n\nPuede completar su pago usando alguno de los siguientes metodos: 
+          \n\n1. **Bank Transfer**: \n- Account Name: ${auctioneer.paymentMethods.bankTransfer.bankAccountName} 
+          \n- Account Number: ${auctioneer.paymentMethods.bankTransfer.bankAccountNumber} \n\n3. **PayPal**:\n- Enviar pago a: ${auctioneer.paypal.paypalEmail}
+          \n\n3. **Pago en entrega (COD)**:\n- Si prefiere COD, debe pagar 20% por adelantado antes de la entrega.\n- Para pagar el 20% adelantado, use cualquiera de los metodos anteriores.\n- El 80% restante lo paga al momento de la entrega. `;
           console.log("SENDING EMAIL TO HIGHEST BIDDER");
           sendEmail({ email: bidder.email, subject, message }); 
           sendEmails({ email: bidder.email, subject, message });

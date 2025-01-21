@@ -50,7 +50,9 @@ if(!amount || !comment){
     if(!allowedFormats.includes(proof.mimetype)){
         return next(new ErrorHandler("Formato de archivo de la captura de pantalla no es soportado",400));
     }
-    const cloudinaryResponse = await uploadImage(proof.tempFilePath);
+    //folder personalizado de acuerdo a la accion
+    const folder="AUCTION_MEDIA_FOLDER_PAYMENT_PROOF"
+    const cloudinaryResponse = await uploadImage(proof.tempFilePath,folder);
     image = {
       url: cloudinaryResponse.secure_url,
       public_id: cloudinaryResponse.public_id,

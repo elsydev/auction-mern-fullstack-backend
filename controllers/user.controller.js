@@ -52,7 +52,9 @@ let image;
         }
         
     }
-    const cloudinaryResponse = await uploadImage(profileImage.tempFilePath);
+    //folder personalizado de acuerdo a la accion
+    const folder="AUCTION_MEDIA_FOLDER_USERS"
+    const cloudinaryResponse = await uploadImage(profileImage.tempFilePath,folder);
     image = {
       url: cloudinaryResponse.secure_url,
       public_id: cloudinaryResponse.public_id,
@@ -92,10 +94,9 @@ let image;
     savedUser.confirmed = false;
     await savedUser.save();
      AuthEmail({ email: savedUser.email, token: savedUser.token });
-     const enlace=`<p>Ingresa el codigo al dar click en el enlace:</p>
-     <a href="${process.env.FRONTEND_URL}confirm-account">Confirmar Cuenta</a>
-     `
-     const message = `Dear ${savedUser.userName}, Por favor haga click en el siguiente enlace ${enlace} e introduzca este codigo ${savedUser.token} para confirmar su cuenta:`;
+     const enlace=`${process.env.FRONTEND_URL}confirm-account`
+     
+     const message = `Estimado(a) ${savedUser.userName}, Por favor haga click en el siguiente enlace ${enlace} e introduzca este codigo ${savedUser.token} para confirmar su cuenta:`;
     sendEmails({email:savedUser.email,subject:"Confirmar Cuenta",message});
      res.json({savedUser,message:"Registro Exitoso, revise su email para confirmar cuenta"}).status(201);
     console.log(savedUser);
