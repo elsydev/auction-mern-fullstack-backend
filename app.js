@@ -29,17 +29,18 @@ const ACCEPTED_ORIGINS = [
     "http://localhost:5174",
     "http://127.0.0.1:5174",
     "https://heartfelt-clafoutis-4aa53b.netlify.app/",
-    "https://auction-mern-fullstack-backend.onrender.com/api/auctionitem/allitems"
+    "https://auction-mern-fullstack-backend.onrender.com/",
+    "https://auction-mern-fullstack-backend.onrender.com"
      
   ]
-app.use(
+/* app.use(
   cors({
     origin: [process.env.FRONTEND_URL],
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   })
-); 
-/*      app.use(cors({
+);  */
+     app.use(cors({
     origin: (origin, callback) => {
       
   
@@ -53,7 +54,7 @@ app.use(
   
       return callback(new Error('Not allowed by CORS'))
     }
-  }))    */ 
+  }))    
 app.use(morgan('dev'));
 
 app.use(express.urlencoded({extended:true}));
