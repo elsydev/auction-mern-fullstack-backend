@@ -40,7 +40,7 @@ const ACCEPTED_ORIGINS = [
     credentials: true,
   })
 );  */
-     app.use(cors({
+    /* app.use(cors({
     origin: (origin, callback) => {
       
   
@@ -54,7 +54,8 @@ const ACCEPTED_ORIGINS = [
   
       return callback(new Error('Not allowed by CORS'))
     }
-  }))    
+  }))    */
+app.use(cors());
 app.use(morgan('dev'));
 
 app.use(express.urlencoded({extended:true}));
