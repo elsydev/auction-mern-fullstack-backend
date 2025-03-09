@@ -8,7 +8,7 @@ export const AuthEmail = async ({ email, token }) => {
     subject: "Confirma tu cuenta en Multivendor",
     text: "Multivendor - Confirma tu cuenta",
     html: `<p>Ingresa este codigo al dar click en el enlace: <b>${token}</b></p>
-        <a href="${process.env.FRONTEND_URL}/confirm-account">Confirmar Cuenta</a>
+        <a href=`${process.env.FRONTEND_URL}/confirm-account`>Confirmar Cuenta</a>
         `,
   });
   console.log("Mensaje Enviado", info.messageId);
