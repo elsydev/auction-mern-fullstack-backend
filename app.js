@@ -30,7 +30,7 @@ const ACCEPTED_ORIGINS = [
     "http://127.0.0.1:5174",
     
     "https://auction-mern-fullstack-frontend.vercel.app/",
-    "https://auction-mern-fullstack-backend.onrender.com"
+    "https://auction-mern-fullstack-frontend.vercel.app/"
      
   ]
 /* app.use(
@@ -40,7 +40,7 @@ const ACCEPTED_ORIGINS = [
     credentials: true,
   })
 );  */
-    /* app.use(cors({
+     app.use(cors({
     origin: (origin, callback) => {
       
   
@@ -54,8 +54,8 @@ const ACCEPTED_ORIGINS = [
   
       return callback(new Error('Not allowed by CORS'))
     }
-  }))    */
-app.use(cors());
+  }))    
+/*app.use(cors());*/
 app.use(morgan('dev'));
 
 app.use(express.urlencoded({extended:true}));
