@@ -30,7 +30,7 @@ const ACCEPTED_ORIGINS = [
     "http://127.0.0.1:5174",
     
     "https://auction-mern-fullstack-frontend.vercel.app/",
-    "https://auction-mern-fullstack-frontend.vercel.app/"
+    
      
   ]
 /* app.use(
